@@ -1,0 +1,177 @@
+.slick-prev {
+  left: -40px !important;
+  height: 40px !important;
+  width: 40px !important;
+  z-index: 1;
+}
+.slick-next {
+  right: -30px !important;
+  height: 40px !important;
+  width: 40px !important;
+  z-index: 1;
+}
+.slick-next::before {
+  color: rgb(222, 102, 233) !important;
+  font-size: 50px !important;
+  transition: 0.5s !important;
+}
+.slick-prev::before {
+  color: rgb(222, 102, 233) !important;
+  font-size: 50px !important;
+  transition: 0.5s !important;
+}
+.section-specialty {
+  background: #f5f5f5;
+  width: 100vw;
+  margin-top: 20px;
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 90px;
+    button {
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      padding: 5px;
+      &:hover {
+        background-color: aqua;
+      }
+    }
+  }
+}
+
+.section-share {
+  height: 430px;
+  &.section-medicalsystem {
+    background-color: #fff;
+
+    .button {
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      padding: 5px;
+      transition: 0.5s;
+      &:hover {
+        background-color: bisque;
+      }
+    }
+  }
+  &.section-specialty {
+    .button {
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      padding: 5px;
+      transition: 0.5s;
+      &:hover {
+        background-color: aqua;
+      }
+    }
+  }
+  &.section-outstandingdoctor {
+    .button {
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      padding: 5px;
+      transition: 0.5s;
+      &:hover {
+        background-color: chocolate;
+      }
+    }
+
+    .section-container {
+      margin: 0 50px;
+      .img-customize {
+        height: 300px;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        flex-direction: column;
+        cursor: pointer;
+        &:hover {
+          h4 {
+            color: blue;
+          }
+        }
+        img {
+          height: 80%;
+          width: 70%;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+  &.section-HandBook {
+    background-color: #fff;
+    .button {
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      padding: 5px;
+      transition: 0.5s;
+      &:hover {
+        background-color: blue;
+      }
+    }
+  }
+  &.section-About {
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    width: 90vw;
+    margin: 0 auto;
+    .section-About-content {
+      width: 100%;
+      padding: 10px 90px;
+      display: flex;
+      gap: 50px;
+      .section-About-content__left {
+        width: 60%;
+        iframe {
+          width: 100%;
+          height: 300px;
+        }
+      }
+      .section-About-content__right {
+        width: 40%;
+        img {
+          width: 100%;
+          height: 300px;
+        }
+      }
+    }
+  }
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 90px;
+  }
+  .section-container {
+    margin: 0 50px;
+    .img-customize {
+      height: 300px;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      flex-direction: column;
+      img {
+        height: 80%;
+        width: 90%;
+        object-fit: cover;
+        // margin-bottom: 5px;
+      }
+    }
+  }
+}
+
+.home-footer {
+  text-align: center;
+  padding: 10px;
+}
+
+.slick-disabled {
+  display: none !important;
+}

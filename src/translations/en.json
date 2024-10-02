@@ -1,0 +1,67 @@
+{
+  "homeheader": {
+    "support": "Support",
+    "medicalspecialty": "Medical specialty",
+    "search-doctor-by-speciality": "Search doctor by speciality",
+    "healthfacilities": "Health facilities",
+    "Chooseahospitalorexaminationroom": "Choose a hospital or examination room",
+    "doctor": "Doctor",
+    "choosethebestdoctor": "Choose the best doctor",
+    "package": "Package",
+    "healthcheckup": "Health check-up",
+    "welcome": "welcome , "
+  },
+  "banner": {
+    "title1": "HEALTHCARE SYSTEM",
+    "title2": "COMPREHENSIVE HEALTHCARE",
+    "titlechild1": "Medical checkup",
+    "titlechild2": "Remote consultation",
+    "titlechild3": "Wellness exam",
+    "titlechild4": "Clinical test",
+    "titlechild5": "Mental health",
+    "titlechild6": "Dental checkup"
+  },
+  "menu": {
+    "admin": {
+      "manage-user": "manage-user",
+      "manage-doctor": "manage-doctor",
+      "manage-admin": "manage-admin",
+      "crud": "CRUD user",
+      "crud-redux": "CRUD user redux",
+      "manage-clinic": "manage-clinic",
+      "admin-clinic": "admin-clinic",
+      "specialty": "specialty",
+      "manage-specialty": "manage-specialty",
+      "handbook": "handbook",
+      "manage-handbook": "manage-handbook"
+    },
+    "doctor": {
+      "manage-schedule": "manage Doctor's schedule"
+    }
+  },
+  "manage-user": {
+    "add": "Add",
+    "email": "Email",
+    "password": "Password",
+    "firstName": "first Name",
+    "lastName": "lastName",
+    "phoneNumber": "phone number",
+    "address": "address",
+    "gender": "gender",
+    "position": "position",
+    "roleId": "roleId",
+    "image": "image",
+    "edit": "Save changes",
+    "save": "Submit"
+  },
+  "homepage": {
+    "out-standing-doctor": "Last week's featured doctor",
+    "see-more": "See more"
+  },
+  "manage-schedule": {
+    "title": "Manage doctor's plant",
+    "Choose-doctor": "Choose doctor",
+    "Choose-date": "Choose date",
+    "save": "save info"
+  }
+}
