@@ -1,5 +1,4 @@
 .doctor-detail-container {
-  height: 500px;
   margin: 0 20px;
   .intro-doctor {
     display: flex;
@@ -32,8 +31,9 @@
   .schedule-doctor {
     margin: 0 100px;
     display: flex;
-    height: 200px;
-    border: 1px solid red;
+    height: 100%;
+    padding: 10px 0;
+    min-height: 150px;
     .content-left {
       width: 50%;
     }
