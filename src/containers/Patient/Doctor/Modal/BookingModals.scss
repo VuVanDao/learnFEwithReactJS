@@ -1,6 +1,5 @@
 .booking-modals-container {
   .booking-modals-content {
-    height: 500px;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -23,7 +22,7 @@
       padding: 10px;
       display: flex;
       justify-content: flex-end;
-      border-top: 1px solid blue;
+      border-top: 1px solid 333;
       gap: 15px;
       button {
         border: none;

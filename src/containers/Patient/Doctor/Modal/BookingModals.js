@@ -3,21 +3,28 @@ import { connect } from "react-redux";
 import { Modal } from "reactstrap";
 import "./BookingModals.scss";
 import { FormattedMessage } from "react-intl";
+import ProfileDoctor from "../ProfileDoctor";
+import { LANGUAGES } from "../../../../utils";
+import NumberFormat from "react-number-format";
+import _ from "lodash";
 class BookingModals extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
   componentDidMount() {}
-  toggle = () => {
-    this.props.toggleUserModal();
-  };
+
   async componentDidUpdate(prevProps, prevState) {
     if (this.props.language !== prevProps.language) {
     }
   }
   render() {
     let { closeBookingModal, isOpenModal, dataTime } = this.props;
+    let doctorId = "";
+    if (dataTime && !_.isEmpty(dataTime)) {
+      doctorId = dataTime.doctorId;
+    }
+    let { language } = this.props;
     return (
       <Modal
         centered
@@ -34,9 +41,10 @@ class BookingModals extends Component {
             </span>
           </div>
           <div className="booking-modals-body container">
-            {/* {JSON.stringify(dataTime.timeTypeData)} */}
-            <div className="doctor-infor"></div>
-            <div className="price">Giá khám 500.000VNĐ</div>
+            <div className="doctor-infor">
+              <ProfileDoctor doctorId={doctorId} />
+            </div>
+
             <div className="row">
               <div className="col-6 form-group">
                 <label>Họ tên</label>
@@ -70,7 +78,12 @@ class BookingModals extends Component {
           </div>
           <div className="booking-modals-footer">
             <button className="btn-booking-confirm">Accept</button>
-            <button className="btn-booking-cancel">Cancel</button>
+            <button
+              className="btn-booking-cancel"
+              onClick={() => closeBookingModal()}
+            >
+              Cancel
+            </button>
           </div>
         </div>
       </Modal>

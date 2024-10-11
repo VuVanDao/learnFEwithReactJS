@@ -7,7 +7,8 @@ import localization from "moment/locale/vi";
 import { LANGUAGES } from "../../../utils/";
 import { getScheduleDoctorByDate } from "../../../services/userService";
 import { FormattedMessage } from "react-intl";
-import BookingModals from "../../homepage/Doctors/Modals/BookingModals";
+
+import BookingModals from "./Modal/BookingModals";
 class DoctorSchedule extends Component {
   constructor(props) {
     super(props);
