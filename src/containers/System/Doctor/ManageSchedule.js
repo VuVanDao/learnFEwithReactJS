@@ -75,7 +75,6 @@ class Doctor extends Component {
     this.setState({
       currentDate: date[0],
     });
-    console.log(date);
   };
   handleClickBtnTime = (time) => {
     let { rangeTime } = this.state;

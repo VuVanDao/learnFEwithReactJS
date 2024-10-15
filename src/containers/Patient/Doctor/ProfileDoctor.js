@@ -5,6 +5,8 @@ import { LANGUAGES } from "../../../utils/";
 import { getProfileDoctorById } from "../../../services/userService.js";
 import { FormattedMessage } from "react-intl";
 import NumberFormat from "react-number-format";
+import _ from "lodash";
+import moment from "moment";
 
 class DefaultClass extends Component {
   constructor(props) {
@@ -36,8 +38,34 @@ class DefaultClass extends Component {
       this.getInfoDoctor(this.props.doctorId);
     }
   }
+  renderTimeBooking = (dataTime, language) => {
+    if (dataTime && !_.isEmpty(dataTime)) {
+      let date =
+        language === LANGUAGES.VI
+          ? moment.unix(+dataTime.date / 1000).format("dddd - DD/MM/YYYY")
+          : moment
+              .unix(+dataTime.date / 1000)
+              .locale("en")
+              .format("ddd - MM/DD/YYYY");
+      return (
+        <>
+          <div>
+            {language === LANGUAGES.VI
+              ? dataTime.timeTypeData.valueVi
+              : dataTime.timeTypeData.valueEn}
+          </div>
+          <div>{date}</div>
+          <div>Miễn phí đặt lịch</div>
+        </>
+      );
+    } else {
+      return <></>;
+    }
+  };
   render() {
     console.log("", this.state);
+    let { isShowDescriptionDoctor, dataTime } = this.props;
+    console.log("check dataTIme", dataTime);
 
     let { dataProfile } = this.state;
     let { language } = this.props;
@@ -63,12 +91,18 @@ class DefaultClass extends Component {
               {language === LANGUAGES.VI ? nameVi : nameEn}
             </div>
             <div className="down">
-              {dataProfile && dataProfile.Doctor_infor && (
+              {isShowDescriptionDoctor === true ? (
                 <>
-                  <span>{dataProfile.Doctor_infor.addressClinic}</span>
-                  <br />
-                  <span>{dataProfile.Doctor_infor.nameClinic}</span>
+                  {dataProfile && dataProfile.Doctor_infor && (
+                    <>
+                      <span>{dataProfile.Doctor_infor.addressClinic}</span>
+                      <br />
+                      <span>{dataProfile.Doctor_infor.nameClinic}</span>
+                    </>
+                  )}
                 </>
+              ) : (
+                <>{this.renderTimeBooking(dataTime, language)}</>
               )}
             </div>
           </div>

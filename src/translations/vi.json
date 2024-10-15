@@ -77,6 +77,16 @@
       "hide-price": "Ẩn bảng giá",
       "detail": "Xem chi tiết",
       "payment": "Người bệnh có thể thanh toán bằng hình thức:"
+    },
+    "booking-modal": {
+      "title": "Thông tin đặt lệnh khám bệnh",
+      "fullName": "Họ và tên",
+      "phoneNumber": "Số điện thoại",
+      "email": "Email",
+      "ContactAddress": "Địa chỉ liên hệ",
+      "birthDay": "Ngày sinh",
+      "gender": "Giới tính",
+      "reason": "Mục đích khám bệnh"
     }
   },
   "admin": {
