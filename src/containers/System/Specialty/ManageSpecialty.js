@@ -52,9 +52,14 @@ class ManageSpecialty extends Component {
     let res = await createNewSpecialty(this.state);
     if (res && res.errCode === 0) {
       toast.success("Add success");
+      this.setState({
+        name: "",
+        imageBase64: "",
+        descriptionHTML: "",
+        descriptionMarkdown: "",
+      });
     } else {
       toast.error("Add failed");
-      console.log("><><><>:", res);
     }
   };
   render() {

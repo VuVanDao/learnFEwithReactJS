@@ -56,7 +56,8 @@
   },
   "homepage": {
     "out-standing-doctor": "Last week's featured doctor",
-    "see-more": "See more"
+    "see-more": "See more",
+    "specialties": "Specialty popular"
   },
   "manage-schedule": {
     "title": "Manage doctor's plant",
