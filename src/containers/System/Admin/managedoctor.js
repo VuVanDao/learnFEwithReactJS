@@ -28,12 +28,18 @@ class TableManageUser extends Component {
       listPrice: [],
       listPayment: [],
       listProvince: [],
+      listClinic: [],
+      listSpecialty: [],
       selectedPrice: "",
       selectedPayment: "",
       selectedProvince: "",
+      selectedClinic: "",
+      selectedSpecialty: "",
       nameClinic: "",
       addressClinic: "",
       note: "",
+      clinicId: "",
+      specialtyId: "",
     };
   }
   componentDidMount() {
@@ -77,7 +83,7 @@ class TableManageUser extends Component {
     if (
       prevProps.allRequiredDoctorInfor !== this.props.allRequiredDoctorInfor
     ) {
-      let { resPrice, resPayment, resProvince } =
+      let { resPrice, resPayment, resProvince, resSpecialty } =
         this.props.allRequiredDoctorInfor;
 
       let dataSelectPrice = this.buildDataInputSelect(resPrice, "PRICE");
@@ -86,11 +92,15 @@ class TableManageUser extends Component {
         resProvince,
         "PROVINCE"
       );
-
+      let dataSelectSpecialty = this.buildDataInputSelect(
+        resSpecialty,
+        "SPECIALTY"
+      );
       this.setState({
         listPrice: dataSelectPrice,
         listPayment: dataSelectPayment,
         listProvince: dataSelectProvince,
+        listSpecialty: dataSelectSpecialty,
       });
     }
   }
@@ -114,11 +124,18 @@ class TableManageUser extends Component {
       nameClinic: this.state.nameClinic,
       addressClinic: this.state.addressClinic,
       note: this.state.note,
+      clinic:
+        this.state.selectedClinic && this.state.selectedClinic.value
+          ? this.state.selectedClinic
+          : "",
+      specialty: this.state.selectedSpecialty.value,
     });
   };
   handleChange = async (selectedOption) => {
     this.setState({ selectedOption });
-    let { listPayment, listPrice, listProvince } = this.state;
+    let { listPayment, listPrice, listProvince, listSpecialty } = this.state;
+    console.log(':":":":":"', listPayment, listSpecialty);
+
     let res = await getDetailInforDoctor(selectedOption.value);
 
     if (res && res.errCode === 0 && res.data.Markdown) {
@@ -129,9 +146,12 @@ class TableManageUser extends Component {
         paymentId = "",
         priceId = "",
         provinceId = "",
+        specialtyId = "",
         selectedPayment = "",
         selectedPrice = "",
-        selectedProvince = "";
+        selectedProvince = "",
+        selectedSpecialty = "";
+      console.log("{}}}{}{", res.data);
 
       if (res.data.Doctor_infor) {
         addressClinic = res.data.Doctor_infor.addressClinic;
@@ -140,6 +160,7 @@ class TableManageUser extends Component {
         paymentId = res.data.Doctor_infor.paymentId;
         priceId = res.data.Doctor_infor.priceId;
         provinceId = res.data.Doctor_infor.provinceId;
+        specialtyId = res.data.Doctor_infor.specialtyId;
 
         selectedPayment = listPayment.find((item) => {
           return item && item.value === paymentId;
@@ -151,6 +172,10 @@ class TableManageUser extends Component {
 
         selectedProvince = listProvince.find((item) => {
           return item && item.value === provinceId;
+        });
+
+        selectedSpecialty = listSpecialty.find((item) => {
+          return item && item.value === specialtyId;
         });
       }
 
@@ -165,6 +190,7 @@ class TableManageUser extends Component {
         selectedPayment: selectedPayment,
         selectedPrice: selectedPrice,
         selectedProvince: selectedProvince,
+        selectedSpecialty: selectedSpecialty,
       });
     } else {
       this.setState({
@@ -229,12 +255,20 @@ class TableManageUser extends Component {
             result.push(object);
           });
         }
+        if (type === "SPECIALTY") {
+          inputData.map((item, index) => {
+            let object = {};
+            object.label = item.name; //value
+            object.value = item.id; //key
+            result.push(object);
+          });
+        }
       }
       return result;
     }
   };
   render() {
-    let { hasOldData } = this.state;
+    let { hasOldData, listSpecialty } = this.state;
     console.log("state<><>", this.state);
 
     return (
@@ -344,14 +378,51 @@ class TableManageUser extends Component {
             />
           </div>
         </div>
+
+        <div className="row">
+          <div className="col-4 form-group">
+            <label>
+              <FormattedMessage id="admin.manage-doctor.select-specialty" />
+            </label>
+            <Select
+              value={this.state.selectedSpecialty}
+              onChange={this.handleChangeSelectDoctorInfo}
+              options={this.state.listSpecialty}
+              placeholder={
+                <FormattedMessage id="admin.manage-doctor.select-specialty" />
+              }
+              name="selectedSpecialty"
+            />
+          </div>
+          <div className="col-4 form-group">
+            <label>
+              <FormattedMessage id="admin.manage-doctor.select-clinic" />
+            </label>
+            <Select
+              value={this.state.selectedClinic}
+              onChange={this.handleChangeSelectDoctorInfo}
+              options={this.state.listClinic}
+              placeholder={
+                <FormattedMessage id="admin.manage-doctor.select-clinic" />
+              }
+              name="selectedClinic"
+            />
+          </div>
+          <div className="col-4 form-group">
+            <label>Chọn chuyên khoa</label>
+            <input className="form-control" />
+          </div>
+        </div>
+
         <div className="manage-doctor-editor">
           <MdEditor
-            style={{ height: "500px" }}
+            style={{ height: "300px" }}
             renderHTML={(text) => mdParser.render(text)}
             onChange={this.handleEditorChange}
             value={this.state.contentMarkdown}
           />
         </div>
+
         <button
           className={
             hasOldData === true
