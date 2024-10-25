@@ -134,8 +134,6 @@ class TableManageUser extends Component {
   handleChange = async (selectedOption) => {
     this.setState({ selectedOption });
     let { listPayment, listPrice, listProvince, listSpecialty } = this.state;
-    console.log(':":":":":"', listPayment, listSpecialty);
-
     let res = await getDetailInforDoctor(selectedOption.value);
 
     if (res && res.errCode === 0 && res.data.Markdown) {
@@ -151,7 +149,6 @@ class TableManageUser extends Component {
         selectedPrice = "",
         selectedProvince = "",
         selectedSpecialty = "";
-      console.log("{}}}{}{", res.data);
 
       if (res.data.Doctor_infor) {
         addressClinic = res.data.Doctor_infor.addressClinic;
@@ -201,6 +198,10 @@ class TableManageUser extends Component {
         addressClinic: "",
         nameClinic: "",
         note: "",
+        selectedPayment: "",
+        selectedPrice: "",
+        selectedProvince: "",
+        selectedSpecialty: "",
       });
     }
   };
@@ -407,10 +408,6 @@ class TableManageUser extends Component {
               }
               name="selectedClinic"
             />
-          </div>
-          <div className="col-4 form-group">
-            <label>Chọn chuyên khoa</label>
-            <input className="form-control" />
           </div>
         </div>
 
