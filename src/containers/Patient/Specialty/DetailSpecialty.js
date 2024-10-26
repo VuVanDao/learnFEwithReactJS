@@ -19,6 +19,7 @@ class DetailSpecialty extends Component {
       arrDoctorId: [],
       dataDetailSpecialty: {},
       listProvince: [],
+      location: "",
     };
   }
   async componentDidMount() {
@@ -49,10 +50,21 @@ class DetailSpecialty extends Component {
             });
           }
         }
+        let dataProvince = resProvince.message;
+
+        if (dataProvince && dataProvince.length > 0) {
+          dataProvince.unshift({
+            keyMap: "ALL",
+            type: "PROVINCE",
+            valueEn: "ALL",
+            valueVi: "Toàn Quốc",
+            createdAt: null,
+          });
+        }
         this.setState({
           dataDetailSpecialty: res.data,
           arrDoctorId: arrDoctorId,
-          listProvince: resProvince.message,
+          listProvince: dataProvince ? dataProvince : [],
         });
       }
     }
@@ -61,9 +73,43 @@ class DetailSpecialty extends Component {
     if (this.props.language !== prevProps.language) {
     }
   }
-  handleOnChangeSelect = (event) => {};
+
+  handleOnChangeSelect = async (event) => {
+    if (
+      this.props.match &&
+      this.props.match.params &&
+      this.props.match.params.id
+    ) {
+      let id = this.props.match.params.id;
+      let location = event.target.value;
+      let res = await getDetailSpecialtyById({
+        id: id,
+        location: location,
+      });
+
+      if (res && res.errCode === 0) {
+        let data = res.data;
+        let arrDoctorId = [];
+        if (data && !_.isEmpty(res.data)) {
+          let arr = data.doctorSpecialty;
+          if (arr && arr.length > 0) {
+            arr.map((item) => {
+              arrDoctorId.push(item.doctorId);
+            });
+          }
+        }
+
+        this.setState({
+          dataDetailSpecialty: res.data,
+          arrDoctorId: arrDoctorId,
+          location: location,
+        });
+      }
+    }
+  };
   render() {
-    let { arrDoctorId, dataDetailSpecialty, listProvince } = this.state;
+    let { arrDoctorId, dataDetailSpecialty, listProvince, location } =
+      this.state;
 
     let language = this.props.language;
     return (
@@ -102,7 +148,22 @@ class DetailSpecialty extends Component {
                     <ProfileDoctor
                       doctorId={item}
                       isShowDescriptionDoctor={true}
+                      isShowLinkDetail={true}
+                      isShowPrice={false}
                     />
+                    {location &&
+                      listProvince.map((item) => {
+                        if (item.keyMap === location)
+                          return (
+                            <span>
+                              <i className="fas fa-map-marker-alt">
+                                {language === LANGUAGES.VI
+                                  ? item.valueVi
+                                  : item.valueEn}
+                              </i>
+                            </span>
+                          );
+                      })}
                   </div>
                   <div className="dt-content-right">
                     <div className="doctor-schedule">
