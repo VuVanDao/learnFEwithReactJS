@@ -6,6 +6,7 @@ import UserRedux from "../containers/System/Admin/UserRedux";
 import managedoctor from "../containers/System/Admin/managedoctor";
 import Header from "../containers/Header/Header";
 import ManageSpecialty from "../containers/System/Specialty/ManageSpecialty";
+import ManageCLinic from "../containers/System/Clinic/ManageCLinic";
 class System extends Component {
   render() {
     const { systemMenuPath, isLoggedIn } = this.props;
@@ -22,6 +23,7 @@ class System extends Component {
                 path="/system/manage-specialty"
                 component={ManageSpecialty}
               />
+              <Route path="/system/manage-clinic" component={ManageCLinic} />
               <Route
                 component={() => {
                   return <Redirect to={systemMenuPath} />;
