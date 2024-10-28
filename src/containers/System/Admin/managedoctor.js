@@ -83,7 +83,7 @@ class TableManageUser extends Component {
     if (
       prevProps.allRequiredDoctorInfor !== this.props.allRequiredDoctorInfor
     ) {
-      let { resPrice, resPayment, resProvince, resSpecialty } =
+      let { resPrice, resPayment, resProvince, resSpecialty, resClinic } =
         this.props.allRequiredDoctorInfor;
 
       let dataSelectPrice = this.buildDataInputSelect(resPrice, "PRICE");
@@ -96,11 +96,14 @@ class TableManageUser extends Component {
         resSpecialty,
         "SPECIALTY"
       );
+      let dataSelectClinic = this.buildDataInputSelect(resClinic, "CLINIC");
+
       this.setState({
         listPrice: dataSelectPrice,
         listPayment: dataSelectPayment,
         listProvince: dataSelectProvince,
         listSpecialty: dataSelectSpecialty,
+        listClinic: dataSelectClinic,
       });
     }
   }
@@ -124,16 +127,17 @@ class TableManageUser extends Component {
       nameClinic: this.state.nameClinic,
       addressClinic: this.state.addressClinic,
       note: this.state.note,
-      clinic:
+      clinicId:
         this.state.selectedClinic && this.state.selectedClinic.value
-          ? this.state.selectedClinic
+          ? this.state.selectedClinic.value
           : "",
       specialty: this.state.selectedSpecialty.value,
     });
   };
   handleChange = async (selectedOption) => {
     this.setState({ selectedOption });
-    let { listPayment, listPrice, listProvince, listSpecialty } = this.state;
+    let { listPayment, listPrice, listProvince, listSpecialty, listClinic } =
+      this.state;
     let res = await getDetailInforDoctor(selectedOption.value);
 
     if (res && res.errCode === 0 && res.data.Markdown) {
@@ -145,10 +149,12 @@ class TableManageUser extends Component {
         priceId = "",
         provinceId = "",
         specialtyId = "",
+        clinicId = "",
         selectedPayment = "",
         selectedPrice = "",
         selectedProvince = "",
-        selectedSpecialty = "";
+        selectedSpecialty = "",
+        selectedClinic = "";
 
       if (res.data.Doctor_infor) {
         addressClinic = res.data.Doctor_infor.addressClinic;
@@ -158,6 +164,7 @@ class TableManageUser extends Component {
         priceId = res.data.Doctor_infor.priceId;
         provinceId = res.data.Doctor_infor.provinceId;
         specialtyId = res.data.Doctor_infor.specialtyId;
+        clinicId = res.data.Doctor_infor.clinicId;
 
         selectedPayment = listPayment.find((item) => {
           return item && item.value === paymentId;
@@ -174,8 +181,11 @@ class TableManageUser extends Component {
         selectedSpecialty = listSpecialty.find((item) => {
           return item && item.value === specialtyId;
         });
-      }
 
+        selectedClinic = listClinic.find((item) => {
+          return item && item.value === clinicId;
+        });
+      }
       this.setState({
         contentHTML: markdown.contentHTML,
         contentMarkdown: markdown.contentMarkdown,
@@ -188,6 +198,7 @@ class TableManageUser extends Component {
         selectedPrice: selectedPrice,
         selectedProvince: selectedProvince,
         selectedSpecialty: selectedSpecialty,
+        selectedClinic: selectedClinic,
       });
     } else {
       this.setState({
@@ -202,6 +213,7 @@ class TableManageUser extends Component {
         selectedPrice: "",
         selectedProvince: "",
         selectedSpecialty: "",
+        selectedClinic: "",
       });
     }
   };
@@ -264,13 +276,20 @@ class TableManageUser extends Component {
             result.push(object);
           });
         }
+        if (type === "CLINIC") {
+          inputData.map((item, index) => {
+            let object = {};
+            object.label = item.name; //value
+            object.value = item.id; //key
+            result.push(object);
+          });
+        }
       }
       return result;
     }
   };
   render() {
     let { hasOldData, listSpecialty } = this.state;
-    console.log("state<><>", this.state);
 
     return (
       <div className="manage-doctor-container">

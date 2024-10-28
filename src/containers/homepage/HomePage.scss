@@ -43,6 +43,11 @@
 
 .section-share {
   height: 430px;
+  .section-container {
+    .img-customize {
+      cursor: pointer;
+    }
+  }
   &.section-medicalsystem {
     background-color: #fff;
 
