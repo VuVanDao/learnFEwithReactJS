@@ -2,7 +2,8 @@
   margin: 0 20px;
   .intro-doctor {
     display: flex;
-
+    margin: 0 70px;
+    gap: 50px;
     .content-left {
       width: 140px;
       height: 140px;
@@ -25,6 +26,9 @@
       }
       .down {
         padding-top: 10px;
+        .like-share-plugin {
+          margin: 20px 0;
+        }
       }
     }
   }
@@ -53,5 +57,8 @@
     img {
       width: 30%;
     }
+  }
+  .comment-doctor {
+    padding: 10px 100px;
   }
 }
