@@ -46,7 +46,7 @@ class LikeAndShare extends Component {
     return (
       <div
         className="fb-like"
-        dataHref={dataHref}
+        dataHref={dataHref} //https://developers.facebook.com/docs/plugins/
         data-width=""
         data-layout="standard"
         data-action="like"

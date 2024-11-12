@@ -51,7 +51,10 @@ class DetailDoctor extends Component {
       nameEn = `${detailDoctor.positionData.valueEn} ${detailDoctor.firstName} ${detailDoctor.lastName}`;
       nameVi = `${detailDoctor.positionData.valueVi} ${detailDoctor.firstName} ${detailDoctor.lastName}`;
     }
-    let currentURL = process.env.REACT_APP_IS_LOCALHOST === true ? "" : "";
+    let currentURL =
+      process.env.REACT_APP_IS_LOCALHOST === 1
+        ? "https://chatbotagain.onrender.com/"
+        : window.location.href;
     return (
       <>
         <HomeHeader iisShowBanner={false} />
@@ -74,7 +77,10 @@ class DetailDoctor extends Component {
                   <span>{detailDoctor.Markdown.description}</span>
                 )}
                 <br />
-                <LikeAndShare />
+                <LikeAndShare
+                  className="like-share-plugin"
+                  dataHref={currentURL}
+                />
               </div>
             </div>
           </div>
@@ -100,7 +106,7 @@ class DetailDoctor extends Component {
               )}
           </div>
           <div className="comment-doctor">
-            <Comment />
+            <Comment dataHref={currentURL} width={"100%"} />
           </div>
         </div>
       </>
